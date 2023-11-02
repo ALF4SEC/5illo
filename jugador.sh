@@ -87,7 +87,7 @@ CARTAS=0
 declare -A JUGADOR1
 declare -A JUGADOR2
 CARTAS=$CARTA1
-while test $I -le $CARTAS
+while test $I -le $CARTA1
 do
 	JUGADOR1[$J]=${NUMEROS[$I]}
 	I=$(($I+1))
@@ -95,7 +95,7 @@ do
 done
 J=0
 CARTAS=$(($CARTAS+$CARTA2))
-while test $I -le $CARTAS
+while test $I -le $CARTA2
 do
 	JUGADOR2[$J]=${NUMEROS[$I]}
 	I=$(($I+1))
@@ -133,12 +133,13 @@ PUNTUAJE=0
 #Determinamos quien comienza echando
     I=0
     EMPIEZA1=0
-    while test $I -lt $CARTA1 -a $FIND -eq 0
+    while test $I -lt $CARTA1 -a $EMPIEZA1 -eq 0
     do 
         if test ${JUGADOR1[$I]} -eq 5
         then
             EMPIEZA1=1
         fi
+        I=$(($I+1))
     done
 
     if test $EMPIEZA1 -eq 1
@@ -148,12 +149,13 @@ PUNTUAJE=0
 
     I=0
     EMPIEZA2=0
-    while test $I -lt $CARTA2 -a $FIND -eq 0
+    while test $I -lt $CARTA2 -a $EMPIEZA2 -eq 0
     do 
         if test ${JUGADOR1[$I]} -eq 5
         then
             EMPIEZA2=1
         fi
+        I=$(($I+1))
     done
 
     if test $EMPIEZA2 -eq 1
@@ -186,23 +188,23 @@ do
     #USUARIO
     if test $TURNO -eq 1
     then
-    echo TURNO JUGADOR 1
+        echo TURNO JUGADOR 1
         if test ${OROS[4]} -eq 0
         then
             echo COMIENZA EL 5 DE OROS
             echo
             I=0
             J=0
-            FIND
-            while test $I -lt $CARTA1 -a $FIND -eq 0
+            FIND=0
+            while test $I -lt $CARTA1 && $FIND -eq 0
             do
-                if test ${JUGADOR1[$I]} -eq 5
+                if test ${JUGADOR1[$I]} -eq 5 
                 then
                     FIND=1
                 fi
                 I=$(($I+1))
             done
-            if test $FIND -eq 1
+            if test $FIND -eq 1 
             then
                 ORO[4]=${JUGADOR1[$I]}
                 PIVOTE_INFO=4
@@ -224,17 +226,19 @@ do
         echo MENU JUGADOR 1
         echo 1')'Echar carta
         echo 2')'Pasar
+        echo Dame la opcion
+        read OPCION
 
         case $OPCION in
             1)
                 CORRECTO=0
-                while test $CORRECTO -eq 0
+                while test $CORRECTO -eq 0 
                 do
                 echo Introduzca el indice de la carta que desea echar
                 read INDICE
                 FIND=0
                 I=0
-                while test $I -lt $CARTA1 -a $FIND -eq 0
+                while test $I -lt $CARTA1 -a $FIND-eq0
                 do
                     if test $I -eq $INDICE
                     then
@@ -282,7 +286,7 @@ do
                                 CORRECTO=1
                                 TURNO=2
                             fi
-                            if test ${JUGADOR1[$INDICE]} -lt ${OROS[PIVOTE_SUPO]} -a ${JUGADOR1[$INDICE]} -eq $((${OROS[$PIVOTE_SUPO]}+1))
+                            if test ${JUGADOR1[$INDICE]} -lt ${OROS[PIVOTE_SUPO]} -a ${JUGADOR1[$INDICE]} -eq$((${OROS[$PIVOTE_SUPO]}+1))
                             then
                                 PIVOTE_SUPO=$(($PIVOTE_SUPO+1))
                                 OROS[$PIVOTE_SUPO]=${JUGADOR1[$INDICE]}
@@ -336,7 +340,7 @@ do
                                 SUM_TURNO=$(($SUM_TURNO+1))
                                 CORRECTO=1
                             fi
-                            if test ${JUGADOR1[$INDICE]} -lt ${ESPADAS[PIVOTE_SUPE]} -a ${JUGADOR1[$INDICE]} -eq $((${ESPADAS[$PIVOTE_SUPE]}+1))
+                            if test ${JUGADOR1[$INDICE]} -lt ${ESPADAS[PIVOTE_SUPE]} -a ${JUGADOR1[$INDICE]} -eq$((${ESPADAS[$PIVOTE_SUPE]}+1))
                             then
                                 PIVOTE_SUPE=$(($PIVOTE_SUPE+1))
                                 ESPADAS[$PIVOTE_SUPE]=${JUGADOR1[$INDICE]}
@@ -358,7 +362,7 @@ do
                     then
                         if test ${BASTOS[4]} -eq 0
                         then
-                            if test ${JUGADOR1[$INDICE]} -eq 5
+                            if test ${JUGADOR1[$INDICE]}-eq25
                             then
                                 BASTOS[4]=${JUGADOR1[$I]}
                                 PIVOTE_INFB=4
@@ -390,7 +394,7 @@ do
                                 SUM_TURNO=$(($SUM_TURNO+1))
                                 CORRECTO=1
                             fi
-                            if test ${JUGADOR1[$INDICE]} -lt ${BASTOS[PIVOTE_SUPB]} -a ${JUGADOR1[$INDICE]} -eq $((${BASTOS[$PIVOTE_SUPB]}+1))
+                            if test ${JUGADOR1[$INDICE]} -lt ${BASTOS[PIVOTE_SUPB]} -a ${JUGADOR1[$INDICE]} -eq$((${BASTOS[$PIVOTE_SUPB]}+1))
                             then
                                 PIVOTE_SUPB=$(($PIVOTE_SUPB+1))
                                 OROS[$PIVOTE_SUPB]=${JUGADOR1[$INDICE]}
@@ -410,9 +414,9 @@ do
                     #PALO DE COPAS
                     if test ${JUGADOR1[$INDICE]} -ge 31 && ${JUGADOR1[$INDICE]} -le 40
                     then
-                        if test ${COPAS[4]} -eq 0
+                        if test ${COPAS[4]}-eq0
                         then
-                            if test ${JUGADOR1[$INDICE]} -eq 5
+                            if test ${JUGADOR1[$INDICE]} -eq 35
                             then
                                 ORO[4]=${JUGADOR1[$I]}
                                 PIVOTE_INFC=4
