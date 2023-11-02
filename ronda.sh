@@ -28,7 +28,7 @@ do
     echo "  JUGADOR  1  '|'  JUGADOR  2  '|'  JUGADOR  3  "
     echo ------------------------------------------------------
     echo "  POS.- CARTA '|'  POS.- CARTA '|'  POS.- CARTA "
-    while test $I -le CARTAS1
+    while test $I -le CARTA1
     do 
         echo "$I.- ${baraja[${JUGADOR1[$I]}]}   $I.- ${baraja[${JUGADOR2[$I]}]}   $I.- ${baraja[${JUGADOR3[$I]}]}"
     done
@@ -190,7 +190,7 @@ do
                 then
                     PIVOTE_SUPO=$(($PIVOTE_SUPO+1))
                     OROS[$PIVOTE_SUPO]=${JUGADOR1[$I]}
-                    while test $I -lt CARTAS1
+                    while test $I -lt CARTA1
                     do
                         JUGADOR1[$I]=${JUGADOR1[$(($I+1))]}
                     done
@@ -202,7 +202,7 @@ do
                 then
                     PIVOTE_SUPO=$(($PIVOTE_SUPO-1))
                     OROS[$PIVOTE_INFO]=${JUGADOR1[$I]}
-                    while test $I -lt CARTAS1
+                    while test $I -lt CARTA1
                     do
                         JUGADOR1[$I]=${JUGADOR1[$(($I+1))]}
                     done
@@ -221,7 +221,7 @@ do
                 then
                     PIVOTE_SUPE=$(($PIVOTE_SUPE+1))
                     ESPADAS[$PIVOTE_SUPE]=${JUGADOR1[$I]}
-                    while test $I -lt CARTAS1
+                    while test $I -lt CARTA1
                     do
                         JUGADOR1[$I]=${JUGADOR1[$(($I+1))]}
                     done
@@ -233,7 +233,7 @@ do
                 then 
                     PIVOTE_SUPE=$(($PIVOTE_SUPE-1))
                     ESPADAS[$PIVOTE_INFE]=${JUGADOR1[$I]}
-                    while test $I -lt CARTAS1
+                    while test $I -lt CARTA1
                     do
                         JUGADOR1[$I]=${JUGADOR1[$(($I+1))]}
                     done
@@ -245,7 +245,7 @@ do
                 if test ${JUGADOR1[$I]} -eq 15
                 then
                     ESPADAS[4]=${JUGADOR1[$I]}
-                    while test $I -lt CARTAS1
+                    while test $I -lt CARTA1
                     do
                         JUGADOR1[$I]=${JUGADOR1[$(($I+1))]}
                     done
@@ -264,7 +264,7 @@ do
                 then
                     PIVOTE_SUPB=$(($PIVOTE_SUPB+1))
                     BASTOS[$PIVOTE_SUPB]=${JUGADOR1[$I]}
-                    while test $I -lt CARTAS1
+                    while test $I -lt CARTA1
                     do
                         JUGADOR1[$I]=${JUGADOR1[$(($I+1))]}
                     done
@@ -276,7 +276,7 @@ do
                 then
                     PIVOTE_SUPB=$(($PIVOTE_SUPB-1))
                     BASTOS[$PIVOTE_INFB]=${JUGADOR1[$I]}
-                    while test $I -lt CARTAS1
+                    while test $I -lt CARTA1
                     do
                         JUGADOR1[$I]=${JUGADOR1[$(($I+1))]}
                     done
@@ -288,7 +288,7 @@ do
                 if test ${JUGADOR1[$I]} -eq 25
                 then
                     BASTOS[4]=${JUGADOR1[$I]}
-                    while test $I -lt CARTAS1
+                    while test $I -lt CARTA1
                     do
                         JUGADOR1[$I]=${JUGADOR1[$(($I+1))]}
                     done
@@ -307,7 +307,7 @@ do
                 then
                     PIVOTE_SUPC=$(($PIVOTE_SUPC+1))
                     COPAS[$PIVOTE_SUPC]=${JUGADOR1[$I]}
-                    while test $I -lt CARTAS1
+                    while test $I -lt CARTA1
                     do
                         JUGADOR1[$I]=${JUGADOR1[$(($I+1))]}
                     done
@@ -319,7 +319,7 @@ do
                 then
                     PIVOTE_SUPC=$(($PIVOTE_SUPC-1))
                     COPAS[$PIVOTE_INFB]=${JUGADOR1[$I]}
-                    while test $I -lt CARTAS1
+                    while test $I -lt CARTA1
                     do
                         JUGADOR1[$I]=${JUGADOR1[$(($I+1))]}
                     done
@@ -331,7 +331,7 @@ do
                 if test ${JUGADOR1[$I]} -eq 35
                 then
                     COPAS[4]=${JUGADOR1[$I]}
-                    while test $I -lt CARTAS1
+                    while test $I -lt CARTA1
                     do
                         JUGADOR1[$I]=${JUGADOR1[$(($I+1))]}
                     done

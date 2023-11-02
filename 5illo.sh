@@ -5,6 +5,9 @@ source config.cfg #otra opciOn serIa ./config.cfg
 EST=$ESTRATEGIA
 JUG=$JUGADORES
 LG=$LOG
+
+declare -A baraja
+
 baraja[0]=" "
 #Palo de oros
 baraja[1]="As de Oros"
@@ -309,24 +312,24 @@ END
 		done
 
 		declare -A OROS
-declare -A ESPADAS
-declare -A BASTOS
-declare -A COPAS
-FINAL=0
-PIVOTE_SUPO=4
-PIVOTE_INFO=4
-PIVOTE_SUPE=4
-PIVOTE_INFE=4
-PIVOTE_SUPB=4
-PIVOTE_INFB=4
-PIVOTE_SUPC=4
-PIVOTE_INFC=4
-RONDA=1
-TURNO=1
-SUM_TURNO=0
-BARAJA=40
-FIND=0
-VACIO=0
+        declare -A ESPADAS
+        declare -A BASTOS
+        declare -A COPAS
+        FINAL=0
+        PIVOTE_SUPO=4
+        PIVOTE_INFO=4
+        PIVOTE_SUPE=4
+        PIVOTE_INFE=4
+        PIVOTE_SUPB=4
+        PIVOTE_INFB=4
+        PIVOTE_SUPC=4
+        PIVOTE_INFC=4
+        RONDA=1
+        TURNO=1
+        SUM_TURNO=0
+        BARAJA=40
+        FIND=0
+        VACIO=0
 
 while test $FINAL -eq 0
 do
@@ -337,7 +340,7 @@ do
     echo "  JUGADOR  1  '|'  JUGADOR  2  '|'  JUGADOR  3  "
     echo ------------------------------------------------------
     echo "  POS.- CARTA '|'  POS.- CARTA '|'  POS.- CARTA "
-    while test $I -le CARTAS1
+    while test $I -le CARTA1
     do 
         echo "$I.- ${baraja[${JUGADOR1[$I]}]}   $I.- ${baraja[${JUGADOR2[$I]}]}   $I.- ${baraja[${JUGADOR3[$I]}]}"
     done
@@ -499,7 +502,7 @@ do
                 then
                     PIVOTE_SUPO=$(($PIVOTE_SUPO+1))
                     OROS[$PIVOTE_SUPO]=${JUGADOR1[$I]}
-                    while test $I -lt CARTAS1
+                    while test $I -lt CARTA1
                     do
                         JUGADOR1[$I]=${JUGADOR1[$(($I+1))]}
                     done
@@ -511,7 +514,7 @@ do
                 then
                     PIVOTE_SUPO=$(($PIVOTE_SUPO-1))
                     OROS[$PIVOTE_INFO]=${JUGADOR1[$I]}
-                    while test $I -lt CARTAS1
+                    while test $I -lt CARTA1
                     do
                         JUGADOR1[$I]=${JUGADOR1[$(($I+1))]}
                     done
@@ -530,7 +533,7 @@ do
                 then
                     PIVOTE_SUPE=$(($PIVOTE_SUPE+1))
                     ESPADAS[$PIVOTE_SUPE]=${JUGADOR1[$I]}
-                    while test $I -lt CARTAS1
+                    while test $I -lt CARTA1
                     do
                         JUGADOR1[$I]=${JUGADOR1[$(($I+1))]}
                     done
@@ -542,7 +545,7 @@ do
                 then 
                     PIVOTE_SUPE=$(($PIVOTE_SUPE-1))
                     ESPADAS[$PIVOTE_INFE]=${JUGADOR1[$I]}
-                    while test $I -lt CARTAS1
+                    while test $I -lt CARTA1
                     do
                         JUGADOR1[$I]=${JUGADOR1[$(($I+1))]}
                     done
@@ -554,7 +557,7 @@ do
                 if test ${JUGADOR1[$I]} -eq 15
                 then
                     ESPADAS[4]=${JUGADOR1[$I]}
-                    while test $I -lt CARTAS1
+                    while test $I -lt CARTA1
                     do
                         JUGADOR1[$I]=${JUGADOR1[$(($I+1))]}
                     done
@@ -573,7 +576,7 @@ do
                 then
                     PIVOTE_SUPB=$(($PIVOTE_SUPB+1))
                     BASTOS[$PIVOTE_SUPB]=${JUGADOR1[$I]}
-                    while test $I -lt CARTAS1
+                    while test $I -lt CARTA1
                     do
                         JUGADOR1[$I]=${JUGADOR1[$(($I+1))]}
                     done
@@ -585,7 +588,7 @@ do
                 then
                     PIVOTE_SUPB=$(($PIVOTE_SUPB-1))
                     BASTOS[$PIVOTE_INFB]=${JUGADOR1[$I]}
-                    while test $I -lt CARTAS1
+                    while test $I -lt CARTA1
                     do
                         JUGADOR1[$I]=${JUGADOR1[$(($I+1))]}
                     done
@@ -597,7 +600,7 @@ do
                 if test ${JUGADOR1[$I]} -eq 25
                 then
                     BASTOS[4]=${JUGADOR1[$I]}
-                    while test $I -lt CARTAS1
+                    while test $I -lt CARTA1
                     do
                         JUGADOR1[$I]=${JUGADOR1[$(($I+1))]}
                     done
@@ -616,7 +619,7 @@ do
                 then
                     PIVOTE_SUPC=$(($PIVOTE_SUPC+1))
                     COPAS[$PIVOTE_SUPC]=${JUGADOR1[$I]}
-                    while test $I -lt CARTAS1
+                    while test $I -lt CARTA1
                     do
                         JUGADOR1[$I]=${JUGADOR1[$(($I+1))]}
                     done
@@ -628,7 +631,7 @@ do
                 then
                     PIVOTE_SUPC=$(($PIVOTE_SUPC-1))
                     COPAS[$PIVOTE_INFB]=${JUGADOR1[$I]}
-                    while test $I -lt CARTAS1
+                    while test $I -lt CARTA1
                     do
                         JUGADOR1[$I]=${JUGADOR1[$(($I+1))]}
                     done
@@ -640,7 +643,7 @@ do
                 if test ${JUGADOR1[$I]} -eq 35
                 then
                     COPAS[4]=${JUGADOR1[$I]}
-                    while test $I -lt CARTAS1
+                    while test $I -lt CARTA1
                     do
                         JUGADOR1[$I]=${JUGADOR1[$(($I+1))]}
                     done
@@ -1308,7 +1311,7 @@ do
 	fi
 		
 		TIME=$(($SECONDS - $START_TIME)) #Pondremos esto al finalizar cada partida
-		echo -e "$(date '+%d-%m-%Y')|$(date '+%H')|$JUG|$TIME|Rondas|Ganador|PuntosGanador|CartasJugadores" >> fichero.log
+		echo -e "$(date '+%d-%m-%Y')|$(date '+%H')|$JUG|$TIME|$RONDAS|Ganador|PuntosGanador|CartasJugadores" >> fichero.log
 	;;
 	e|E)
 	
