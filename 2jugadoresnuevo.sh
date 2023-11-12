@@ -141,7 +141,7 @@ do
     echo ------------------------------------------------------
     while test $I -lt $CARTA1
     do 
-        echo "$(($I+1)).-  ${baraja[${JUGADOR1[$I]}]}   ${baraja[${JUGADOR2[$I]}]} "
+        echo "$I.- ${baraja[${JUGADOR1[$I]}]}   $I.- ${baraja[${JUGADOR2[$I]}]}   $I.- ${baraja[${JUGADOR3[$I]}]}"
         I=$(($I+1))
     done
     echo ------------------------------------------------------
@@ -160,7 +160,7 @@ do
         VACIO=0
         while test $I -lt 10 -a $VACIO -eq 0
         do
-            if test ${ORO[$I]} -eq 0 -a ${ESPADAS[$I]} -eq 0 -a ${BASTOS[$I]} -eq 0 -a ${COPAS[$I]} -eq 0
+            if test "${ORO[$I]}" -eq 0 -a "${ESPADAS[$I]}" -eq 0 -a "${BASTOS[$I]}" -eq 0 -a "${COPAS[$I]}" -eq 0
             then
                 I=$(($I+1))
             else
@@ -203,7 +203,7 @@ do
             #Comprobacion que se puede echar carta 
             if test "${JUGADOR1[$I]}" -ge 1 -a "${JUGADOR1[$I]}" -le 10
             then
-                if test ["${OROS[4]}" -ne 0]
+                if test "${OROS[4]}" -ne 0
                 then
                     if test "${JUGADOR1[$I]}" -gt "${OROS[$PIVOTE_SUPO]}" -a "${JUGADOR1[$I]}" -eq $((${OROS[$PIVOTE_SUPO]}+1)) -o "${JUGADOR1[$I]}" -lt "${OROS[$PIVOTE_INFO]}" -a "${JUGADOR1[$I]}" -eq $((${OROS[$PIVOTE_INFO]}-1))
                     then
@@ -243,7 +243,7 @@ do
 
             if test "${JUGADOR1[$I]}" -ge 21 -a "${JUGADOR1[$I]}" -le 30
             then
-                if test ${BASTOS[4]} -ne 0
+                if test "${BASTOS[4]}" -ne 0
                 then
                     if test "${JUGADOR1[$I]}" -gt "${BASTOS[$PIVOTE_SUPB]}" -a "${JUGADOR1[$I]}" -eq $((${BASTOS[$PIVOTE_SUPB]}+1)) -o "${JUGADOR1[$I]}" -lt "${BASTOS[$PIVOTE_INFB]}" -a "${JUGADOR1[$I]}" -eq $((${BASTOS[$PIVOTE_INFB]}-1))
                     then
@@ -263,7 +263,7 @@ do
 
             if test "${JUGADOR1[$I]}" -ge 31 -a "${JUGADOR1[$I]}" -le 40
             then
-                if test ${COPAS[4]} -ne 0
+                if test "${COPAS[4]}" -ne 0
                 then
                     if test "${JUGADOR1[$I]}" -gt "${COPAS[$PIVOTE_SUPC]}" -a "${JUGADOR1[$I]}" -eq $((${COPAS[$PIVOTE_SUPC]}+1)) -o "${JUGADOR1[$I]}" -lt "${COPAS[$PIVOTE_INFC]}" -a "${JUGADOR1[$I]}" -eq $((${COPAS[$PIVOTE_INFC]}-1))
                     then
@@ -284,7 +284,7 @@ do
         PASAR=1
         done
 
-        while test $CORRECTO -eq 0 -a $PASAR -ne 1
+        while test "$CORRECTO" -eq 0 -a "$PASAR" -ne 1
         do
         echo Dame el indice de la carta que quieres echar
         read INDICE
@@ -472,7 +472,7 @@ do
         VACIO=0
         while test $I -lt 10 -a $VACIO -eq 0
         do
-            if test ${ORO[$I]} -eq 0 -a ${ESPADAS[$I]} -eq 0 -a ${BASTOS[$I]} -eq 0 -a ${COPAS[$I]} -eq 0
+            if test "${ORO[$I]}" -eq 0 -a "${ESPADAS[$I]}" -eq 0 -a "${BASTOS[$I]}" -eq 0 -a "${COPAS[$I]}" -eq 0
             then
                 I=$(($I+1))
             else
@@ -513,7 +513,7 @@ do
             while test $I -lt $CARTA2 -a $PUEDE -eq 0
             do
             #Comprobacion que se puede echar carta 
-            if test ${JUGADOR2[$I]} -ge 1 -a ${JUGADOR2[$I]} -le 10
+            if test "${JUGADOR2[$I]}" -ge 1 -a "${JUGADOR2[$I]}" -le 10
             then
                 if test "${OROS[4]}" -ne 0
                 then
@@ -533,9 +533,9 @@ do
                 fi
             fi
 
-            if test ${JUGADOR2[$I]} -ge 11 -a ${JUGADOR2[$I]} -le 20
+            if test "${JUGADOR2[$I]}" -ge 11 -a "${JUGADOR2[$I]}" -le 20
             then
-                if test ${ESPADAS[4]} -ne 0
+                if test "${ESPADAS[4]}" -ne 0
                 then
                     if test "${JUGADOR2[$I]}" -gt "${ESPADAS[$PIVOTE_SUPOE]}" -a "${JUGADOR2[$I]}" -eq $((${ESPADAS[$PIVOTE_SUPE]}+1)) -o "${JUGADOR2[$I]}" -lt "${ESPADAS[$PIVOTE_INFE]}" -a "${JUGADOR2[$I]}" -eq $((${ESPADAS[$PIVOTE_INFE]}-1))
                     then
@@ -553,7 +553,7 @@ do
                 fi
             fi
 
-            if test ${JUGADOR2[$I]} -ge 21 -a ${JUGADOR2[$I]} -le 30
+            if test "${JUGADOR2[$I]}" -ge 21 -a "${JUGADOR2[$I]}" -le 30
             then
                 if test "${BASTOS[4]}" -ne 0
                 then
@@ -573,7 +573,7 @@ do
                 fi
             fi
 
-            if test ${JUGADOR2[$I]} -ge 31 -a ${JUGADOR2[$I]} -le 40
+            if test "${JUGADOR2[$I]}" -ge 31 -a "${JUGADOR2[$I]}" -le 40
             then
                 if test "${COPAS[4]}" -ne 0
                 then
@@ -596,8 +596,7 @@ do
         PASAR=1
         done
 
-        while test \($CORRECTO -eq 0 -a \
-                     $PASAR -ne 1 \) \
+        while test "$CORRECTO" -eq 0 -a "$PASAR" -ne 1
         do
         echo Dame el indice de la carta que quieres echar
         read INDICE
@@ -800,5 +799,4 @@ do
     SUM_TURNO=0
     fi
 done
-
 exit 0

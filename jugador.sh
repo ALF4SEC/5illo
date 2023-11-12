@@ -2,52 +2,52 @@
 
 baraja[0]=" "
 #Palo de oros
-baraja[1]="As de Oros"
-baraja[2]="2 de Oros"
-baraja[3]="3 de Oros"
-baraja[4]="4 de Oros"
-baraja[5]="5 de Oros"
-baraja[6]="6 de Oros"
-baraja[7]="7 de Oros"
-baraja[8]="J de Oros"
-baraja[9]="C de Oros"
-baraja[10]="K de Oros"
+baraja[1]="As de Oros    "
+baraja[2]="2 de Oros     "
+baraja[3]="3 de Oros     "
+baraja[4]="4 de Oros     "
+baraja[5]="5 de Oros     "
+baraja[6]="6 de Oros     "
+baraja[7]="7 de Oros     "
+baraja[8]="J de Oros     "
+baraja[9]="C de Oros     "
+baraja[10]="K de Oros    "
 
 #Palo de espadas
 baraja[11]="As de Espadas"
-baraja[12]="2 de Espadas"
-baraja[13]="3 de Espadas"
-baraja[14]="4 de Espadas"
-baraja[15]="5 de Espadas"
-baraja[16]="6 de Espadas"
-baraja[17]="7 de Espadas"
-baraja[18]="J de Espadas"
-baraja[19]="C de Espadas"
-baraja[20]="K de Espadas"
+baraja[12]="2 de Espadas "
+baraja[13]="3 de Espadas "
+baraja[14]="4 de Espadas "
+baraja[15]="5 de Espadas "
+baraja[16]="6 de Espadas "
+baraja[17]="7 de Espadas "
+baraja[18]="J de Espadas "
+baraja[19]="C de Espadas "
+baraja[20]="K de Espadas "
 
 #Palo de bastos
-baraja[21]="As de Bastos"
-baraja[22]="2 de Bastos"
-baraja[23]="3 de Bastos"
-baraja[24]="4 de Bastos"
-baraja[25]="5 de Bastos"
-baraja[26]="6 de Bastos"
-baraja[27]="7 de Bastos"
-baraja[28]="J de Bastos"
-baraja[29]="C de Bastos"
-baraja[30]="K de Bastos"
+baraja[21]="As de Bastos "
+baraja[22]="2 de Bastos  "
+baraja[23]="3 de Bastos  "
+baraja[24]="4 de Bastos  "
+baraja[25]="5 de Bastos  "
+baraja[26]="6 de Bastos  "
+baraja[27]="7 de Bastos  "
+baraja[28]="J de Bastos  "
+baraja[29]="C de Bastos  "
+baraja[30]="K de Bastos  "
 
 #Palo de copas
-baraja[31]="As de Copas"
-baraja[32]="2 de Copas"
-baraja[33]="3 de Copas"
-baraja[34]="4 de Copas"
-baraja[35]="5 de Copas"
-baraja[36]="6 de Copas"
-baraja[37]="7 de Copas"
-baraja[38]="J de Copas"
-baraja[39]="C de Copas"
-baraja[40]="K de Copas"
+baraja[31]="As de Copas  "
+baraja[32]="2 de Copas   "
+baraja[33]="3 de Copas   "
+baraja[34]="4 de Copas   "
+baraja[35]="5 de Copas   "
+baraja[36]="6 de Copas   "
+baraja[37]="7 de Copas   "
+baraja[38]="J de Copas   "
+baraja[39]="C de Copas   "
+baraja[40]="K de Copas   "
 
 BARAJA=40
 FIND=0		
@@ -101,11 +101,55 @@ do
 done
 unset NUMEROS
 
-#Jugador1
+#Declaramos los vectores de los palos
 declare -A OROS
+OROS[0]=0
+OROS[1]=0
+OROS[2]=0
+OROS[3]=0
+OROS[4]=0
+OROS[5]=0
+OROS[6]=0
+OROS[7]=0
+OROS[8]=0
+OROS[9]=0
+
 declare -A ESPADAS
+ESPADAS[0]=0
+ESPADAS[1]=0
+ESPADAS[2]=0
+ESPADAS[3]=0
+ESPADAS[4]=0
+ESPADAS[5]=0
+ESPADAS[6]=0
+ESPADAS[7]=0
+ESPADAS[8]=0
+ESPADAS[9]=0
+
 declare -A BASTOS
+BASTOS[0]=0
+BASTOS[1]=0
+BASTOS[2]=0
+BASTOS[3]=0
+BASTOS[4]=0
+BASTOS[5]=0
+BASTOS[6]=0
+BASTOS[7]=0
+BASTOS[8]=0
+BASTOS[9]=0
+
 declare -A COPAS
+COPAS[0]=0
+COPAS[1]=0
+COPAS[2]=0
+COPAS[3]=0
+COPAS[4]=0
+COPAS[5]=0
+COPAS[6]=0
+COPAS[7]=0
+COPAS[8]=0
+COPAS[9]=0
+
 FINAL=0
 PIVOTE_SUPO=4
 PIVOTE_INFO=4
@@ -161,680 +205,167 @@ PUNTUAJE=0
         TURNO=2;
     fi
 
+FINAL=0 
 while test $FINAL -eq 0
 do
-    #USUARIO
+    #Presentacion de los datos
+    I=0
+    echo "----------------------------------------"
+    echo "            RONDA $RONDA"
+    echo "----------------------------------------"
+    echo "POS |   JUGADOR 1   |    JUGADOR 2"
+    while test $I -lt 20
+    do
+        echo "$I     ${baraja[${JUGADOR1[$I]}]}   ${baraja[${JUGADOR2[$I]}]}"
+        I=$(($I+1))
+    done
+    I=0
+    echo "----------------------------------------------"
+    echo "    OROS    |    ESPADAS    |    BASTOS    |    COPAS"
+    while test $I -lt 10
+    do
+        echo " ${baraja[${OROS[$I]}]}   ${baraja[${ESPADAS[$I]}]}   ${baraja[${BASTOS[$I]}]}   ${baraja[${COPAS[$I]}]}"
+        I=$(($I+1))
+    done
+    echo "----------------------------------------------"
+    echo
+
+    #TURNO DEL JUGADOR 1
     if test $TURNO -eq 1
     then
-        clear  #Limpio la pantalla
-        I=0
-        echo "                  RONDA $RONDA                  "
-         echo ----------------------------------------------------------------
-        echo "POS   '|'   JUGADOR  1   '|'   JUGADOR  2   "
-        echo ----------------------------------------------------------------
-        while test $I -lt $CARTA1
-        do 
-            echo "$I.-    ${baraja[${JUGADOR1[$I]}]}     ${baraja[${JUGADOR2[$I]}]} "
-            I=$(($I+1))
-        done
-        echo ----------------------------------------------------------------
-        echo "  OROS   '|'   ESPADAS   '|'   BASTOS   '|'   COPAS"
-        while test $I -le 10
-        do 
-            echo "${baraja[${OROS[$I]}]}   ${baraja[${ESPADAS[$I]}]}    ${baraja[${BASTOS[$I]}]}   ${baraja[${COPAS[$I]}]}"
-            I=$(($I+1))
-        done
-        echo -----------------------------------------------------------------
-        echo TURNO JUGADOR 1
-        if test [[${OROS[4]} -eq 0]]
+        echo "Turno del JUGADOR 1"
+        if test ${OROS[4]} -eq 0
         then
-            echo COMIENZA EL 5 DE OROS
-            echo
+            echo "Comienza el 5 de Oros"
+            OROS[4]=5
             I=0
-            J=0
             FIND=0
-            while test $I -lt $CARTA1 && $FIND -eq 0
+            #Buscamos el 5 de oros en el vector de los JUGADOR 1
+            while test $I -lt $CARTA1 -a $FIND -eq 0
             do
-                if test ${JUGADOR1[$I]} -eq 5 
+                if test ${JUGADOR1[$I]} -eq 5
                 then
                     FIND=1
                 fi
                 I=$(($I+1))
             done
-            if test $FIND -eq 1 
+
+            J=$(($I-1))
+            if test $FIND -eq 1
             then
-                ORO[4]=${JUGADOR1[$I]}
-                PIVOTE_INFO=4
-                PIVOTE_SUPO=4
-                J=$I
-                while test $J -lt $CARTA1
+                while test $I -lt $CARTA1
                 do
-                    JUGADOR1[$J]=${JUGADOR1[$(($J+1))]}
+                    JUGADOR1[$J]=${JUGADOR1[$I]}
+                    I=$(($I+1))
                     J=$(($J+1))
                 done
-                CARTA1=$(($I-1))
-                TURNO=2
-                SUM_TURNO=$(($SUM_TURNO+1))
             fi
+            JUGADOR1[$CARTA1]=0
+            CARTA1=$(($CARTA1-1))
+            SUM_TURNO=$(($SUM_TURNO+1))
+            TURNO=2
         else
-
-        SALIR=0
-        while test $SALIR -eq 0 
-        do
-        echo MENU JUGADOR 1
-        echo 1')'Echar carta
-        echo 2')'Pasar
-        echo Dame la opcion
-        read OPCION
-
-        case $OPCION in
-            1)
-                CORRECTO=0
-                while test $CORRECTO -eq 0 
-                do
-                echo Introduzca el indice de la carta que desea echar
+            SALIR=0
+            while test $SALIR -eq 0
+            do
+                echo "Elige la posicion de la carta que quieres echar:"
                 read INDICE
-                FIND=0
                 I=0
-                while test $I -lt $CARTA1 -a $FIND -eq 0
+                FIND=0
+                while test $I -lt 20 -a $FIND -eq 0
                 do
-                    if test $I -eq $INDICE
+                    if test $I -eq ${JUGADOR1[$INDICE]}
                     then
                         FIND=1
                     fi
                     I=$(($I+1))
                 done
-                J=$I
+
                 if test $FIND -eq 1
                 then
-                    #PALO DE OROS
-                    if test ${JUGADOR1[$INDICE]} -ge 1 && ${JUGADOR1[$INDICE]} -le 10
+                    if test ${JUGADOR1[$INDICE]} -ge 1 -a ${JUGADOR1[$INDICE]} -le 10
                     then
-                        if test ${OROS[4]} -eq 0
-                        then
-                            if test ${JUGADOR1[$INDICE]} -eq 5
-                            then
-                                ORO[4]=${JUGADOR1[$I]}
-                                PIVOTE_INFO=4
-                                PIVOTE_SUPO=4
-                                while test $J -lt $CARTA1
-                                do
-                                    JUGADOR1[$J]=${JUGADOR1[$(($J+1))]}
-                                    J=$(($J+1))
-                                done
-                                CARTA1=$(($I-1))
-                                SUM_TURNO=$(($SUM_TURNO+1))
-                                CORRECTO=1
-                                TURNO=2
-                                SALIR=1
-                            else
-                                CORRECTO=0
-                            fi
-                        else
-                            if test ${JUGADOR1[$INDICE]} -lt ${OROS[PIVOTE_INFO]} -a ${JUGADOR1[$INDICE]} -eq $((${OROS[$PIVOTE_INFO]}-1))
-                            then
-                                PIVOTE_INFO=$(($PIVOTE_INFO-1))
-                                OROS[$PIVOTE_INFO]=${JUGADOR1[$INDICE]}
-                                while test $J -lt $CARTA1
-                                do
-                                    JUGADOR1[$J]=${JUGADOR1[$(($J+1))]}
-                                    J=$(($J+1))
-                                done
-                                CARTA1=$(($I-1))
-                                SUM_TURNO=$(($SUM_TURNO+1))
-                                CORRECTO=1
-                                TURNO=2
-                                SALIR=1
-                            fi
-                            if test ${JUGADOR1[$INDICE]} -lt ${OROS[PIVOTE_SUPO]} -a ${JUGADOR1[$INDICE]} -eq$((${OROS[$PIVOTE_SUPO]}+1))
-                            then
-                                PIVOTE_SUPO=$(($PIVOTE_SUPO+1))
-                                OROS[$PIVOTE_SUPO]=${JUGADOR1[$INDICE]}
-                                while test $J -lt $CARTA1
-                                do
-                                    JUGADOR1[$J]=${JUGADOR1[$(($J+1))]}
-                                    J=$(($J+1))
-                                done
-                                CARTA1=$(($I-1))
-                                SUM_TURNO=$(($SUM_TURNO+1))
-                                CORRECTO=1
-                                TURNO=2
-                                SALIR=1
-                            fi
-                        fi
+                        echo es de oros
                     fi
 
-                    #PALO DE ESPADAS
-                    if test ${JUGADOR1[$INDICE]} -ge 11 && ${JUGADOR1[$INDICE]} -le 20
+                    if test ${JUGADOR1[$INDICE]} -ge 11 -a ${JUGADOR1[$INDICE]} -le 20
                     then
-                        if test ${ESPADAS[4]} -eq 0
-                        then
-                            if test ${JUGADOR1[$INDICE]} -eq 15
-                            then
-                                ESPADAS[4]=${JUGADOR1[$I]}
-                                PIVOTE_INFE=4
-                                PIVOTE_SUPE=4
-                                while test $J -lt $CARTA1
-                                do
-                                    JUGADOR1[$J]=${JUGADOR1[$(($J+1))]}
-                                    J=$(($J+1))
-                                done
-                                CARTA1=$(($I-1))
-                                TURNO=2
-                                SUM_TURNO=$(($SUM_TURNO+1))
-                                CORRECTO=1
-                                SALIR=1
-                            else
-                                CORRECTO=0
-                            fi
-                        else
-                            if test ${JUGADOR1[$INDICE]} -lt ${ESPADAS[PIVOTE_INFE]} -a ${JUGADOR1[$INDICE]} -eq $((${ESPADAS[$PIVOTE_INFE]}-1))
-                            then
-                                PIVOTE_INFE=$(($PIVOTE_INFE-1))
-                                ESPADAS[$PIVOTE_INFE]=${JUGADOR1[$INDICE]}
-                                while test $J -lt $CARTA1
-                                do
-                                    JUGADOR1[$J]=${JUGADOR1[$(($J+1))]}
-                                    J=$(($J+1))
-                                done
-                                CARTA1=$(($I-1))
-                                TURNO=2
-                                SUM_TURNO=$(($SUM_TURNO+1))
-                                CORRECTO=1
-                                SALIR=1
-                            fi
-                            if test ${JUGADOR1[$INDICE]} -lt ${ESPADAS[PIVOTE_SUPE]} -a ${JUGADOR1[$INDICE]} -eq$((${ESPADAS[$PIVOTE_SUPE]}+1))
-                            then
-                                PIVOTE_SUPE=$(($PIVOTE_SUPE+1))
-                                ESPADAS[$PIVOTE_SUPE]=${JUGADOR1[$INDICE]}
-                                while test $J -lt $CARTA1
-                                do
-                                    JUGADOR1[$J]=${JUGADOR1[$(($J+1))]}
-                                    J=$(($J+1))
-                                done
-                                CARTA1=$(($I-1))
-                                TURNO=2
-                                SUM_TURNO=$(($SUM_TURNO+1))
-                                CORRECTO=1
-                                SALIR=1
-                            fi
-                        fi
+                        echo es de espadas
                     fi
 
-                    #PALO DE BASTOS
-                    if test ${JUGADOR1[$INDICE]} -ge 21 && ${JUGADOR1[$INDICE]} -le 30
+                    if test ${JUGADOR1[$INDICE]} -ge 21 -a ${JUGADOR1[$INDICE]} -le 30
                     then
-                        if test ${BASTOS[4]} -eq 0
-                        then
-                            if test ${JUGADOR1[$INDICE]}-eq25
-                            then
-                                BASTOS[4]=${JUGADOR1[$I]}
-                                PIVOTE_INFB=4
-                                PIVOTE_SUPB=4
-                                while test $J -lt $CARTA1
-                                do
-                                    JUGADOR1[$J]=${JUGADOR1[$(($J+1))]}
-                                    J=$(($J+1))
-                                done
-                                CARTA1=$(($I-1))
-                                TURNO=2
-                                SUM_TURNO=$(($SUM_TURNO+1))
-                                CORRECTO=1
-                                SALIR=1
-                            else
-                                CORRECTO=0
-                            fi
-                        else
-                            if test ${JUGADOR1[$INDICE]} -lt ${BASTOS[PIVOTE_INFB]} -a ${JUGADOR1[$INDICE]} -eq $((${BASTOS[$PIVOTE_INFB]}-1))
-                            then
-                                PIVOTE_INFB=$(($PIVOTE_INFB-1))
-                                OROS[$PIVOTE_INFB]=${JUGADOR1[$INDICE]}
-                                while test $J -lt $CARTA1
-                                do
-                                    JUGADOR1[$J]=${JUGADOR1[$(($J+1))]}
-                                    J=$(($J+1))
-                                done
-                                CARTA1=$(($I-1))
-                                TURNO=2
-                                SUM_TURNO=$(($SUM_TURNO+1))
-                                CORRECTO=1
-                                SALIR=1
-                            fi
-                            if test ${JUGADOR1[$INDICE]} -lt ${BASTOS[PIVOTE_SUPB]} -a ${JUGADOR1[$INDICE]} -eq$((${BASTOS[$PIVOTE_SUPB]}+1))
-                            then
-                                PIVOTE_SUPB=$(($PIVOTE_SUPB+1))
-                                OROS[$PIVOTE_SUPB]=${JUGADOR1[$INDICE]}
-                                while test $J -lt $CARTA1
-                                do
-                                    JUGADOR1[$J]=${JUGADOR1[$(($J+1))]}
-                                    J=$(($J+1))
-                                done
-                                CARTA1=$(($I-1))
-                                TURNO=2
-                                SUM_TURNO=$(($SUM_TURNO+1))
-                                CORRECTO=1
-                                SALIR=1
-                            fi
-                        fi
+                        echo es de bastos
                     fi
 
-                    #PALO DE COPAS
-                    if test ${JUGADOR1[$INDICE]} -ge 31 && ${JUGADOR1[$INDICE]} -le 40
+                    if test ${JUGADOR1[$INDICE]} -ge 31 -a ${JUGADOR1[$INDICE]} -le 40
                     then
-                        if test ${COPAS[4]}-eq0
-                        then
-                            if test ${JUGADOR1[$INDICE]} -eq 35
-                            then
-                                ORO[4]=${JUGADOR1[$I]}
-                                PIVOTE_INFC=4
-                                PIVOTE_SUPC=4
-                                while test $J -lt $CARTA1
-                                do
-                                    JUGADOR1[$J]=${JUGADOR1[$(($J+1))]}
-                                    J=$(($J+1))
-                                done
-                                CARTA1=$(($I-1))
-                                TURNO=2
-                                SUM_TURNO=$(($SUM_TURNO+1))
-                                CORRECTO=1
-                                SALIR=1
-                            else
-                                CORRECTO=0
-                            fi
-                        else
-                            if test ${JUGADOR1[$INDICE]} -lt ${BASTOS[PIVOTE_INFC]} -a ${JUGADOR1[$INDICE]} -eq $((${OBASTOSROS[$PIVOTE_INFC]}-1))
-                            then
-                                PIVOTE_INFC=$(($PIVOTE_INFC-1))
-                                OROS[$PIVOTE_INFC]=${JUGADOR1[$INDICE]}
-                                while test $J -lt $CARTA1
-                                do
-                                    JUGADOR1[$J]=${JUGADOR1[$(($J+1))]}
-                                    J=$(($J+1))
-                                done
-                                CARTA1=$(($I-1))
-                                TURNO=2
-                                SUM_TURNO=$(($SUM_TURNO+1))
-                                CORRECTO=1
-                                SALIR=1
-                            fi
-                            if test ${JUGADOR1[$INDICE]} -lt ${COPAS[PIVOTE_SUPC]} -a ${JUGADOR1[$INDICE]} -eq $((${COPAS[$PIVOTE_SUPC]}+1))
-                            then
-                                PIVOTE_SUPC=$(($PIVOTE_SUPC+1))
-                                OROS[$PIVOTE_SUPC]=${JUGADOR1[$INDICE]}
-                                while test $J -lt $CARTA1
-                                do
-                                    JUGADOR1[$J]=${JUGADOR1[$(($J+1))]}
-                                    J=$(($J+1))
-                                done
-                                CARTA1=$(($I-1))
-                                TURNO=2
-                                SUM_TURNO=$(($SUM_TURNO+1))
-                                CORRECTO=1
-                                SALIR=1
-                            fi
-                        fi
+                        echo es de copas
                     fi
-                else
-                    echo El indice selecionado no es valido, vuelva a seleccionarlo
+                    
+                    TURNO=2
+                    SALIR=1
                 fi
             done
-            ;;
-            2)
-                TURNO=2
-                SALIR=1
-            ;;
-            *)
-                echo La opcion introducida no es valida, introduzcala otra vez
-            ;;
-        esac
-        done
         fi
     fi
 
+    #Turno del JUGADOR 2
     if test $TURNO -eq 2
     then
-        clear  #Limpio la pantalla
-        I=0
-        echo "                  RONDA $RONDA                  "
-         echo ----------------------------------------------------------------
-        echo "POS   '|'   JUGADOR  1   '|'   JUGADOR  2   '|'   JUGADOR  3  "
-        echo ----------------------------------------------------------------
-        while test $I -lt $CARTA1
-        do 
-            echo "$I.-    ${baraja[${JUGADOR2[$I]}]}     ${baraja[${JUGADOR2[$I]}]}     ${baraja[${JUGADOR3[$I]}]}"
-            I=$(($I+1))
-        done
-        echo ----------------------------------------------------------------
-        echo "  OROS   '|'   ESPADAS   '|'   BASTOS   '|'   COPAS"
-        while test $I -le 10
-        do 
-            echo "${baraja[${OROS[$I]}]}   ${baraja[${ESPADAS[$I]}]}    ${baraja[${BASTOS[$I]}]}   ${baraja[${COPAS[$I]}]}"
-            I=$(($I+1))
-        done
-        echo -----------------------------------------------------------------
-        echo TURNO JUGADOR 2
-        if test [[${OROS[4]} -eq 0]]
+        echo Turno del JUGADOR 2
+        if test ${OROS[4]} -eq 0
         then
-            echo COMIENZA EL 5 DE OROS
-            echo
+            echo "Comienza el 5 de Oros"
+            OROS[4]=5
             I=0
-            J=0
             FIND=0
-            while test $I -lt $CARTA2 && $FIND -eq 0
+            #Buscamos el 5 de oros en el vector de los JUGADOR 1
+            while test $I -lt $CARTA2 -a $FIND -eq 0
             do
-                if test ${JUGADOR2[$I]} -eq 5 
+                if test ${JUGADOR2[$I]} -eq 5
                 then
                     FIND=1
                 fi
                 I=$(($I+1))
             done
-            if test $FIND -eq 1 
+
+            #Redimensionamos el vector
+            J=$(($I-1))
+            if test $FIND -eq 1
             then
-                ORO[4]=${JUGADOR2[$I]}
-                PIVOTE_INFO=4
-                PIVOTE_SUPO=4
-                J=$I
-                while test $J -lt $CARTA2
+                while test $I -lt $CARTA2
                 do
-                    JUGADOR2[$J]=${JUGADOR2[$(($J+1))]}
+                    JUGADOR2[$J]=${JUGADOR2[$I]}
+                    I=$(($I+1))
                     J=$(($J+1))
                 done
-                CARTA2=$(($I-1))
-                TURNO=1
-                SUM_TURNO=$(($SUM_TURNO+1))
             fi
+            JUGADOR1[$CARTA1]=0
+            CARTA2=$(($CARTA2-1))
+            SUM_TURNO=$(($SUM_TURNO+1))
+            TURNO=1
         else
-
-        SALIR=0
-        while test $SALIR -eq 0 
-        do
-            if test $EST -eq 0
-            then
-                CORRECTO=0
-                while test $CORRECTO -eq 0 
-                do
-                INDICE=$((1+ $RANDOM % $CARTAS2))
-                FIND=0
-                I=0
-                while test $I -lt $CARTA2 -a $FIND -eq 0
-                do
-                    if test $I -eq $INDICE
-                    then
-                        FIND=1
-                    fi
-                    I=$(($I+1))
-                done
-                J=$I
-                if test $FIND -eq 1
-                then
-                    #PALO DE OROS
-                    if test ${JUGADOR2[$INDICE]} -ge 1 && ${JUGADOR2[$INDICE]} -le 10
-                    then
-                        if test ${OROS[4]} -eq 0
-                        then
-                            if test ${JUGADOR2[$INDICE]} -eq 5
-                            then
-                                ORO[4]=${JUGADOR2[$I]}
-                                PIVOTE_INFO=4
-                                PIVOTE_SUPO=4
-                                while test $J -lt $CARTA2
-                                do
-                                    JUGADOR2[$J]=${JUGADOR2[$(($J+1))]}
-                                    J=$(($J+1))
-                                done
-                                CARTA2=$(($I-1))
-                                SUM_TURNO=$(($SUM_TURNO+1))
-                                CORRECTO=1
-                                TURNO=1
-                                SALIR=1
-                            else
-                                CORRECTO=0
-                            fi
-                        else
-                            if test ${JUGADOR2[$INDICE]} -lt ${OROS[PIVOTE_INFO]} -a ${JUGADOR2[$INDICE]} -eq $((${OROS[$PIVOTE_INFO]}-1))
-                            then
-                                PIVOTE_INFO=$(($PIVOTE_INFO-1))
-                                OROS[$PIVOTE_INFO]=${JUGADOR2[$INDICE]}
-                                while test $J -lt $CARTA2
-                                do
-                                    JUGADOR2[$J]=${JUGADOR2[$(($J+1))]}
-                                    J=$(($J+1))
-                                done
-                                CARTA2=$(($I-1))
-                                SUM_TURNO=$(($SUM_TURNO+1))
-                                CORRECTO=1
-                                TURNO=1
-                                SALIR=1
-                            fi
-                            if test ${JUGADOR2[$INDICE]} -lt ${OROS[PIVOTE_SUPO]} -a ${JUGADOR2[$INDICE]} -eq$((${OROS[$PIVOTE_SUPO]}+1))
-                            then
-                                PIVOTE_SUPO=$(($PIVOTE_SUPO+1))
-                                OROS[$PIVOTE_SUPO]=${JUGADOR2[$INDICE]}
-                                while test $J -lt $CARTA2
-                                do
-                                    JUGADOR2[$J]=${JUGADOR2[$(($J+1))]}
-                                    J=$(($J+1))
-                                done
-                                CARTA2=$(($I-1))
-                                SUM_TURNO=$(($SUM_TURNO+1))
-                                CORRECTO=1
-                                TURNO=1
-                                SALIR=1
-                            fi
-                        fi
-                    fi
-
-                    #PALO DE ESPADAS
-                    if test ${JUGADOR2[$INDICE]} -ge 11 && ${JUGADOR2[$INDICE]} -le 20
-                    then
-                        if test ${ESPADAS[4]} -eq 0
-                        then
-                            if test ${JUGADOR2[$INDICE]} -eq 15
-                            then
-                                ESPADAS[4]=${JUGADOR2[$I]}
-                                PIVOTE_INFE=4
-                                PIVOTE_SUPE=4
-                                while test $J -lt $CARTA2
-                                do
-                                    JUGADOR2[$J]=${JUGADOR2[$(($J+1))]}
-                                    J=$(($J+1))
-                                done
-                                CARTA2=$(($I-1))
-                                TURNO=1
-                                SUM_TURNO=$(($SUM_TURNO+1))
-                                CORRECTO=1
-                                SALIR=1
-                            else
-                                CORRECTO=0
-                            fi
-                        else
-                            if test ${JUGADOR2[$INDICE]} -lt ${ESPADAS[PIVOTE_INFE]} -a ${JUGADOR2[$INDICE]} -eq $((${ESPADAS[$PIVOTE_INFE]}-1))
-                            then
-                                PIVOTE_INFE=$(($PIVOTE_INFE-1))
-                                ESPADAS[$PIVOTE_INFE]=${JUGADOR2[$INDICE]}
-                                while test $J -lt $CARTA2
-                                do
-                                    JUGADOR2[$J]=${JUGADOR2[$(($J+1))]}
-                                    J=$(($J+1))
-                                done
-                                CARTA2=$(($I-1))
-                                TURNO=1
-                                SUM_TURNO=$(($SUM_TURNO+1))
-                                CORRECTO=1
-                                SALIR=1
-                            fi
-                            if test ${JUGADOR2[$INDICE]} -lt ${ESPADAS[PIVOTE_SUPE]} -a ${JUGADOR2[$INDICE]} -eq$((${ESPADAS[$PIVOTE_SUPE]}+1))
-                            then
-                                PIVOTE_SUPE=$(($PIVOTE_SUPE+1))
-                                ESPADAS[$PIVOTE_SUPE]=${JUGADOR2[$INDICE]}
-                                while test $J -lt $CARTA2
-                                do
-                                    JUGADOR2[$J]=${JUGADOR2[$(($J+1))]}
-                                    J=$(($J+1))
-                                done
-                                CARTA2=$(($I-1))
-                                TURNO=1
-                                SUM_TURNO=$(($SUM_TURNO+1))
-                                CORRECTO=1
-                                SALIR=1
-                            fi
-                        fi
-                    fi
-
-                    #PALO DE BASTOS
-                    if test ${JUGADOR2[$INDICE]} -ge 21 && ${JUGADOR2[$INDICE]} -le 30
-                    then
-                        if test ${BASTOS[4]} -eq 0
-                        then
-                            if test ${JUGADOR2[$INDICE]}-eq25
-                            then
-                                BASTOS[4]=${JUGADOR2[$I]}
-                                PIVOTE_INFB=4
-                                PIVOTE_SUPB=4
-                                while test $J -lt $CARTA2
-                                do
-                                    JUGADOR2[$J]=${JUGADOR2[$(($J+1))]}
-                                    J=$(($J+1))
-                                done
-                                CARTA2=$(($I-1))
-                                TURNO=1
-                                SUM_TURNO=$(($SUM_TURNO+1))
-                                CORRECTO=1
-                                SALIR=1
-                            else
-                                CORRECTO=0
-                            fi
-                        else
-                            if test ${JUGADOR2[$INDICE]} -lt ${BASTOS[PIVOTE_INFB]} -a ${JUGADOR2[$INDICE]} -eq $((${BASTOS[$PIVOTE_INFB]}-1))
-                            then
-                                PIVOTE_INFB=$(($PIVOTE_INFB-1))
-                                OROS[$PIVOTE_INFB]=${JUGADOR2[$INDICE]}
-                                while test $J -lt $CARTA2
-                                do
-                                    JUGADOR2[$J]=${JUGADOR2[$(($J+1))]}
-                                    J=$(($J+1))
-                                done
-                                CARTA2=$(($I-1))
-                                TURNO=1
-                                SUM_TURNO=$(($SUM_TURNO+1))
-                                CORRECTO=1
-                                SALIR=1
-                            fi
-                            if test ${JUGADOR2[$INDICE]} -lt ${BASTOS[PIVOTE_SUPB]} -a ${JUGADOR2[$INDICE]} -eq$((${BASTOS[$PIVOTE_SUPB]}+1))
-                            then
-                                PIVOTE_SUPB=$(($PIVOTE_SUPB+1))
-                                OROS[$PIVOTE_SUPB]=${JUGADOR2[$INDICE]}
-                                while test $J -lt $CARTA2
-                                do
-                                    JUGADOR2[$J]=${JUGADOR2[$(($J+1))]}
-                                    J=$(($J+1))
-                                done
-                                CARTA2=$(($I-1))
-                                TURNO=1
-                                SUM_TURNO=$(($SUM_TURNO+1))
-                                CORRECTO=1
-                                SALIR=1
-                            fi
-                        fi
-                    fi
-
-                    #PALO DE COPAS
-                    if test ${JUGADOR2[$INDICE]} -ge 31 && ${JUGADOR2[$INDICE]} -le 40
-                    then
-                        if test ${COPAS[4]}-eq0
-                        then
-                            if test ${JUGADOR2[$INDICE]} -eq 35
-                            then
-                                ORO[4]=${JUGADOR2[$I]}
-                                PIVOTE_INFC=4
-                                PIVOTE_SUPC=4
-                                while test $J -lt $CARTA2
-                                do
-                                    JUGADOR2[$J]=${JUGADOR2[$(($J+1))]}
-                                    J=$(($J+1))
-                                done
-                                CARTA2=$(($I-1))
-                                TURNO=1
-                                SUM_TURNO=$(($SUM_TURNO+1))
-                                CORRECTO=1
-                                SALIR=1
-                            else
-                                CORRECTO=0
-                            fi
-                        else
-                            if test ${JUGADOR2[$INDICE]} -lt ${BASTOS[PIVOTE_INFC]} -a ${JUGADOR2[$INDICE]} -eq $((${OBASTOSROS[$PIVOTE_INFC]}-1))
-                            then
-                                PIVOTE_INFC=$(($PIVOTE_INFC-1))
-                                OROS[$PIVOTE_INFC]=${JUGADOR2[$INDICE]}
-                                while test $J -lt $CARTA2
-                                do
-                                    JUGADOR2[$J]=${JUGADOR2[$(($J+1))]}
-                                    J=$(($J+1))
-                                done
-                                CARTA2=$(($I-1))
-                                TURNO=1
-                                SUM_TURNO=$(($SUM_TURNO+1))
-                                CORRECTO=1
-                                SALIR=1
-                            fi
-                            if test ${JUGADOR2[$INDICE]} -lt ${COPAS[PIVOTE_SUPC]} -a ${JUGADOR2[$INDICE]} -eq $((${COPAS[$PIVOTE_SUPC]}+1))
-                            then
-                                PIVOTE_SUPC=$(($PIVOTE_SUPC+1))
-                                OROS[$PIVOTE_SUPC]=${JUGADOR2[$INDICE]}
-                                while test $J -lt $CARTA2
-                                do
-                                    JUGADOR2[$J]=${JUGADOR2[$(($J+1))]}
-                                    J=$(($J+1))
-                                done
-                                CARTA2=$(($I-1))
-                                TURNO=1
-                                SUM_TURNO=$(($SUM_TURNO+1))
-                                CORRECTO=1
-                                SALIR=1
-                            fi
-                        fi
-                    fi
-                else
-                    echo El indice selecionado no es valido, vuelva a seleccionarlo
-                fi
-            done
-            fi
-            if test $EST -eq 1
-            then
-                echo Estrategia no implementada
-                CORRECTO=1
-                TURNO=1
-                SALIR=1
-            fi
-            if test $EST -eq 2
-            then
-                echo Estrategia no implementada
-                CORRECTO=1
-                TURNO=1
-                SALIR=1
-            fi 
-        done
+            echo aaaaaaaaaa
         fi
+        TURNO=1
     fi
 
-    if test $CARTA1 -eq 0
+    if test $SUM_TURNO -eq 2
     then
-        GANADOR=1
+        RONDA=$(($RONDA+1))
+    fi
+
+    if test $CARTA1 -eq 0;
+    then
         PUNTUAJE=$CARTA2
         FINAL=1
     fi
 
-    if test $CARTA2 -eq 0
+    if test $CARTA2 -eq 0;
     then
-        GANADOR=2
         PUNTUAJE=$CARTA1
         FINAL=1
-    fi
-
-    if test $SUM_TURNO -eq 2
-    then 
-        RONDA=$(($RONDA+1))
-        SUM_TURNO=0
     fi
 done
 
