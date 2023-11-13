@@ -1,5 +1,6 @@
 #!/bin/bash
 
+declare -A baraja
 baraja[0]=" "
 #Palo de oros
 baraja[1]="As de Oros    "
@@ -229,6 +230,7 @@ do
     done
     echo "----------------------------------------------"
     echo
+    sleep 3
 
     #TURNO DEL JUGADOR 1
     if test $TURNO -eq 1
@@ -260,7 +262,7 @@ do
                     J=$(($J+1))
                 done
             fi
-            JUGADOR1[$CARTA1]=0
+            JUGADOR2[$(($CARTA1-1))]=0
             CARTA1=$(($CARTA1-1))
             SUM_TURNO=$(($SUM_TURNO+1))
             TURNO=2
@@ -268,44 +270,55 @@ do
             SALIR=0
             while test $SALIR -eq 0
             do
-                echo "Elige la posicion de la carta que quieres echar:"
+                echo "Elige la posicion de la carta que quieres echar: "
                 read INDICE
-                I=0
-                FIND=0
-                while test $I -lt 20 -a $FIND -eq 0
-                do
-                    if test $I -eq ${JUGADOR1[$INDICE]}
-                    then
-                        FIND=1
-                    fi
-                    I=$(($I+1))
-                done
-
-                if test $FIND -eq 1
+                CORRECTO=0
+                if test  $INDICE -ge 0 -a $INDICE -le $(($CARTA1-1))
                 then
-                    if test ${JUGADOR1[$INDICE]} -ge 1 -a ${JUGADOR1[$INDICE]} -le 10
-                    then
-                        echo es de oros
-                    fi
+                    I=0
+                    FIND=0
+                    while test $I -lt 20 -a $FIND -eq 0
+                    do
+                        if test ${JUGADOR1[$I]} -eq ${JUGADOR1[$INDICE]}
+                        then
+                            echo encontrado
+                            FIND=1
+                        fi
+                            I=$(($I+1))
+                    done
 
-                    if test ${JUGADOR1[$INDICE]} -ge 11 -a ${JUGADOR1[$INDICE]} -le 20
+                    if test $FIND -eq 1
                     then
-                        echo es de espadas
-                    fi
+                        if test ${JUGADOR1[$INDICE]} -ge 1 -a ${JUGADOR1[$INDICE]} -le 10 
+                        then
+                            echo es de oros
+                            sleep 3
+                        fi
 
-                    if test ${JUGADOR1[$INDICE]} -ge 21 -a ${JUGADOR1[$INDICE]} -le 30
-                    then
-                        echo es de bastos
-                    fi
+                        if test ${JUGADOR1[$INDICE]} -ge 11 -a ${JUGADOR1[$INDICE]} -le 20 
+                        then
+                            echo es de espadas
+                            sleep 3
+                        fi
 
-                    if test ${JUGADOR1[$INDICE]} -ge 31 -a ${JUGADOR1[$INDICE]} -le 40
-                    then
+                        if test ${JUGADOR1[$INDICE]} -ge 21 -a ${JUGADOR1[$INDICE]} -le 30 
+                        then
+                            echo es de bastos
+                            sleep 3
+                        fi
+
+                        if test ${JUGADOR1[$INDICE]} -ge 31 -a ${JUGADOR1[$INDICE]} -le 40 
+                        then
                         echo es de copas
-                    fi
+                        sleep 3
+                        fi
                     
-                    TURNO=2
-                    SALIR=1
-                fi
+                        TURNO=2
+                        SALIR=1
+                    fi
+                else
+                    echo "El indice no es valido"
+                fi  
             done
         fi
     fi
@@ -341,7 +354,7 @@ do
                     J=$(($J+1))
                 done
             fi
-            JUGADOR1[$CARTA1]=0
+            JUGADOR2[$(($CARTA2-1))]=0
             CARTA2=$(($CARTA2-1))
             SUM_TURNO=$(($SUM_TURNO+1))
             TURNO=1
