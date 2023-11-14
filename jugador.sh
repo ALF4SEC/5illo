@@ -233,7 +233,7 @@ do
     sleep 3
 
     #TURNO DEL JUGADOR 1
-    if test $TURNO -eq 1
+    if test $TURNO -eq 1 -a $FINAL -eq 0
     then
         echo "Turno del JUGADOR 1"
         if test ${OROS[4]} -eq 0
@@ -268,6 +268,113 @@ do
             TURNO=2
         else
             SALIR=0
+            PUEDE=0
+            #Comprobamos si el JUGADOR2 puede echar
+            I=0
+            while test $I -lt $CARTA1 -a $PUEDE -eq 0
+            do
+                if test ${JUGADOR1[$I]} -ge 1 -a ${JUGADOR1[$I]} -le 10 
+                then
+                    if test ${OROS[4]} -ne 0
+                    then
+                        if test ${JUGADOR1[$I]} -eq $((${OROS[$PIVOTE_SUPO]}+1))
+                        then
+                            PUEDE=1
+                            SALIR=0
+                        fi
+                        if test ${JUGADOR1[$I]} -eq $((${OROS[$PIVOTE_INFO]}-1))
+                        then
+                            PUEDE=1
+                            SALIR=0
+                        fi
+                    else
+                        if test ${JUGADOR1[$I]} -eq 5
+                        then
+                            PUEDE=1
+                            SALIR=0
+                        fi
+                    fi
+                fi
+
+                if test ${JUGADOR1[$I]} -ge 11 -a ${JUGADOR1[$I]} -le 20 
+                then
+                    if test ${ESPADAS[4]} -ne 0
+                    then
+                        if test ${JUGADOR1[$I]} -eq $((${ESPADAS[$PIVOTE_SUPE]}+1))
+                        then
+                            PUEDE=1
+                            SALIR=0
+                        fi
+                        if test ${JUGADOR1[$I]} -eq $((${ESPADAS[$PIVOTE_INFE]}-1))
+                        then
+                            PUEDE=1
+                            SALIR=0
+                        fi
+                    else
+                        if test ${JUGADOR1[$I]} -eq 15
+                        then
+                            PUEDE=1
+                            SALIR=0
+                        fi
+                    fi
+                fi
+
+                if test ${JUGADOR1[$I]} -ge 21 -a ${JUGADOR1[$I]} -le 30 
+                then
+                    if test ${BASTOS[4]} -ne 0
+                    then
+                        if test ${JUGADOR1[$I]} -eq $((${BASTOS[$PIVOTE_SUPB]}+1))
+                        then
+                            PUEDE=1
+                            SALIR=0
+                        fi
+                        if test ${JUGADOR1[$I]} -eq $((${BASTOS[$PIVOTE_INFB]}-1))
+                        then
+                            PUEDE=1
+                            SALIR=0
+                        fi
+                    else
+                        if test ${JUGADOR1[$I]} -eq 25
+                        then
+                            PUEDE=1
+                            SALIR=0
+                        fi
+                    fi
+                fi
+
+                if test ${JUGADOR1[$I]} -ge 31 -a ${JUGADOR1[$I]} -le 40 
+                then
+                    if test ${COPAS[4]} -ne 0
+                    then
+                        if test ${JUGADOR1[$I]} -eq $((${COPAS[$PIVOTE_SUPC]}+1))
+                        then
+                            PUEDE=1
+                            SALIR=0
+                        fi
+                        if test ${JUGADOR1[$I]} -eq $((${COPAS[$PIVOTE_INFC]}-1))
+                        then
+                            PUEDE=1
+                            SALIR=0
+                        fi
+                    else
+                        if test ${JUGADOR1[$I]} -eq 35
+                        then
+                            PUEDE=1
+                            SALIR=0
+                        fi
+                    fi
+                fi
+                I=$(($I+1))
+            done
+        
+            if test $PUEDE -eq 0
+            then
+                echo "El JUGADOR 1 PASA"
+                TURNO=2
+                SUM_TURNO=$(($SUM_TURNO+1))
+                SALIR=1
+            fi
+
             while test $SALIR -eq 0
             do
                 echo "Elige la posicion de la carta que quieres echar: "
@@ -398,6 +505,8 @@ do
                             I=$(($I+1))
                             done
 
+                            echo "JUGADOR1 echa ${baraja[${JUGADOR1[$INDICE]}]}"
+
                             J=$(($I-1))
                             if test $FIND -eq 1
                             then
@@ -408,6 +517,7 @@ do
                                     J=$(($J+1))
                                 done
                             fi
+                            
                             JUGADOR1[$(($CARTA1-1))]=0
                             CARTA1=$(($CARTA1-1))
                             SUM_TURNO=$(($SUM_TURNO+1))
@@ -422,8 +532,16 @@ do
         fi
     fi
 
+
+    if test $CARTA1 -eq 0;
+    then
+        PUNTUAJE=$CARTA2
+        GANADOR=1
+        FINAL=1
+    fi
+
     #Turno del JUGADOR 2
-    if test $TURNO -eq 2
+    if test $TURNO -eq 2 -a $FINAL -eq 0
     then
         echo Turno del JUGADOR 2
         if test ${OROS[4]} -eq 0
@@ -460,9 +578,108 @@ do
         else
             SALIR=0
             PUEDE=0
+            #Comprobamos si el JUGADOR2 puede echar
+            I=0
+            while test $I -lt $CARTA2 -a $PUEDE -eq 0
+            do
+                if test ${JUGADOR2[$I]} -ge 1 -a ${JUGADOR2[$I]} -le 10 
+                then
+                    if test ${OROS[4]} -ne 0
+                    then
+                        if test ${JUGADOR2[$I]} -eq $((${OROS[$PIVOTE_SUPO]}+1))
+                        then
+                            PUEDE=1
+                        fi
+                        if test ${JUGADOR2[$I]} -eq $((${OROS[$PIVOTE_INFO]}-1))
+                        then
+                            PUEDE=1
+                        fi
+                    else
+                        if test ${JUGADOR2[$I]} -eq 5
+                        then
+                            PUEDE=1
+                        fi
+                    fi
+                fi
+
+                if test ${JUGADOR2[$I]} -ge 11 -a ${JUGADOR2[$I]} -le 20 
+                then
+                    if test ${ESPADAS[4]} -ne 0
+                    then
+                        if test ${JUGADOR2[$I]} -eq $((${ESPADAS[$PIVOTE_SUPE]}+1))
+                        then
+                            PUEDE=1
+                        fi
+                        if test ${JUGADOR2[$I]} -eq $((${ESPADAS[$PIVOTE_INFE]}-1))
+                        then
+                            PUEDE=1
+                        fi
+                    else
+                        if test ${JUGADOR2[$I]} -eq 15
+                        then
+                            PUEDE=1
+                        fi
+                    fi
+                fi
+
+                if test ${JUGADOR2[$I]} -ge 21 -a ${JUGADOR2[$I]} -le 30 
+                then
+                    if test ${BASTOS[4]} -ne 0
+                    then
+                        if test ${JUGADOR2[$I]} -eq $((${BASTOS[$PIVOTE_SUPB]}+1))
+                        then
+                            PUEDE=1
+                        fi
+                        if test ${JUGADOR2[$I]} -eq $((${BASTOS[$PIVOTE_INFB]}-1))
+                        then
+                            PUEDE=1
+                        fi
+                    else
+                        if test ${JUGADOR2[$I]} -eq 25
+                        then
+                            PUEDE=1
+                        fi
+                    fi
+                fi
+
+                if test ${JUGADOR2[$I]} -ge 31 -a ${JUGADOR2[$I]} -le 40 
+                then
+                    if test ${COPAS[4]} -ne 0
+                    then
+                        if test ${JUGADOR2[$I]} -eq $((${COPAS[$PIVOTE_SUPC]}+1))
+                        then
+                            PUEDE=1
+                        fi
+                        if test ${JUGADOR2[$I]} -eq $((${COPAS[$PIVOTE_INFC]}-1))
+                        then
+                            PUEDE=1
+                        fi
+                    else
+                        if test ${JUGADOR2[$I]} -eq 35
+                        then
+                            PUEDE=1
+                        fi
+                    fi
+                fi 
+                I=$(($I+1))
+            done
+
+            if test $PUEDE -eq 0
+            then
+                echo "El JUGADOR 2 PASA"
+                TURNO=1
+                SUM_TURNO=$(($SUM_TURNO+1))
+                SALIR=1
+            fi
+            
             while test $SALIR -eq 0
             do
-                INDICE=$((0+ $RANDOM % $(($CARTA2-1))))
+                if test $(($CARTA2-1)) -eq 0
+                then
+                    INDICE=0
+                else
+                    INDICE=$((0+ $RANDOM % $CARTA2))
+                fi
                 CORRECTO=0
                 if test  $INDICE -ge 0 -a $INDICE -le $(($CARTA2-1))
                 then
@@ -589,6 +806,8 @@ do
                             I=$(($I+1))
                             done
 
+                            echo "JUGADOR2 echa ${baraja[${JUGADOR2[$INDICE]}]}"      
+
                             J=$(($I-1))
                             if test $FIND -eq 1
                             then
@@ -598,35 +817,30 @@ do
                                     I=$(($I+1))
                                     J=$(($J+1))
                                 done
+                                JUGADOR2[$(($CARTA2-1))]=0
+                                CARTA2=$(($CARTA2-1))
+                                SUM_TURNO=$(($SUM_TURNO+1))
+                                TURNO=1
+                                SALIR=1
                             fi
-                            JUGADOR2[$(($CARTA2-1))]=0
-                            CARTA2=$(($CARTA2-1))
-                            SUM_TURNO=$(($SUM_TURNO+1))
-                            TURNO=1
-                            SALIR=1
                         fi
                     fi
                 fi  
             done
         fi
     fi
-    echo llego aqui
-    if test $SUM_TURNO -eq 2
-    then
-        RONDA=$(($RONDA+1))
-        SUM_TURNO=0
-    fi
-
-    if test $CARTA1 -eq 0;
-    then
-        PUNTUAJE=$CARTA2
-        FINAL=1
-    fi
 
     if test $CARTA2 -eq 0;
     then
         PUNTUAJE=$CARTA1
+        GANADOR=2
         FINAL=1
+    fi
+
+    if test $SUM_TURNO -eq 2
+    then
+        RONDA=$(($RONDA+1))
+        SUM_TURNO=0
     fi
 done
 
