@@ -105,6 +105,7 @@ COPAS[9]=0
 
 while test $SALIR -eq 0
 do
+clear
 #Presentacion del menu
 echo 5illo
 echo C')' Configuracion
